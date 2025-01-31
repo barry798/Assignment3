@@ -1,29 +1,26 @@
-// Display Full Name and NUID on page load
 document.addEventListener("DOMContentLoaded", function () {
   const header = document.createElement("h2");
   header.textContent = "Full Name: Rui Huang | NUID: 002058671";
   document.body.insertBefore(header, document.body.firstChild);
 
-  // Ensure all expandable rows are hidden on page load
+
   document.querySelectorAll(".dropDownTextArea").forEach(row => row.style.display = "none");
 
-  // Ensure all checkboxes are unchecked and rows are not highlighted
+ 
   document.querySelectorAll("#myTable input[type='checkbox']").forEach(checkbox => {
       checkbox.checked = false;
       let row = checkbox.closest("tr");
-      row.style.backgroundColor = "white"; // Ensure all rows have a normal background
-      row.cells[8].innerHTML = ""; // Clear any pre-existing buttons in the DELETE column
+      row.style.backgroundColor = "white"; 
+      row.cells[8].innerHTML = ""; 
   });
 
-  // Disable submit button initially
   const submitButton = document.getElementById("button");
   submitButton.disabled = true;
   submitButton.style.backgroundColor = "gray";
 });
 
-let studentCount = 3; // Track number of students
+let studentCount = 3; 
 
-// Function to toggle row expansion
 document.querySelectorAll("#myTable img").forEach(img => {
   img.addEventListener("click", function () {
       let row = this.closest("tr").nextElementSibling;
@@ -33,7 +30,6 @@ document.querySelectorAll("#myTable img").forEach(img => {
   });
 });
 
-// Function to add a new student
 document.getElementById("add").addEventListener("click", function () {
   studentCount++;
   const table = document.getElementById("myTable");
@@ -56,7 +52,6 @@ document.getElementById("add").addEventListener("click", function () {
   alert(`Student ${studentCount} Record added successfully`);
 });
 
-// Checkbox event listener
 document.getElementById("myTable").addEventListener("change", function (e) {
   if (e.target.type === "checkbox") {
       let row = e.target.closest("tr");
@@ -74,7 +69,6 @@ document.getElementById("myTable").addEventListener("change", function (e) {
                   row.remove();
                   alert(`${studentName} Record deleted successfully`);
 
-                  // Update submit button if no rows are selected
                   const anyChecked = document.querySelectorAll("#myTable input[type='checkbox']:checked").length > 0;
                   submitButton.disabled = !anyChecked;
                   submitButton.style.backgroundColor = anyChecked ? "orange" : "gray";
@@ -96,7 +90,6 @@ document.getElementById("myTable").addEventListener("change", function (e) {
           row.cells[8].innerHTML = "";
       }
 
-      // Update submit button color based on selection
       const anyChecked = document.querySelectorAll("#myTable input[type='checkbox']:checked").length > 0;
       submitButton.disabled = !anyChecked;
       submitButton.style.backgroundColor = anyChecked ? "orange" : "gray";
